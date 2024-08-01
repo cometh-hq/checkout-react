@@ -1,4 +1,4 @@
-import { CheckoutAPI, Transaction } from "@cometh/checkout-sdk"
+import { CheckoutAPI, PublicTransaction } from "@cometh/checkout-sdk"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
 const TRANSACTION_POLLING_INTERVAL = 1000
@@ -114,21 +114,22 @@ export const useWaitForTransaction = (
 ) => {
   const checkoutClient = useCheckoutClient(apikey, apiUrl)
   const [isLoading, setIsLoading] = useState(true)
-  const [transaction, setTransaction] = useState<Transaction | null>(null)
+  const [transaction, setTransaction] = useState<PublicTransaction | null>(null)
   const [error, setError] = useState<unknown | null>(null)
 
   const waitForTransaction = useCallback(async () => {
     try {
       setIsLoading(true)
-      const transaction = await checkoutClient.transactions.getTransactionById({
-        transactionId
-      })
+      const publicTransaction =
+        await checkoutClient.transactions.getPublicTransactionById({
+          transactionId
+        })
+      setTransaction(publicTransaction)
       if (
         FINAL_TRANSACTION_STATUSES.includes(
-          transaction.status as TransactionStatus
+          publicTransaction.status as TransactionStatus
         )
       ) {
-        setTransaction(transaction)
         setIsLoading(false)
       } else {
         setTimeout(waitForTransaction, TRANSACTION_POLLING_INTERVAL)

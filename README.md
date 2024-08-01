@@ -28,7 +28,7 @@ const App = () => {
       <CheckoutButton
         apikey="your-stripe-api-key"
         productId={12345}
-        userAddress="123 Main St, Anytown, USA"
+        userAddress="0x123456789123456789"
         email="user@example.com"
         successUrl="https://yourdomain.com/success"
         failUrl="https://yourdomain.com/fail"
