@@ -1,6 +1,6 @@
 {
   "name": "@cometh/checkout-react",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React components for cometh checkout",
   "author": "Cometh",
   "license": "MIT",
@@ -18,7 +18,7 @@
   },
   "types": "./dist/src/index.d.ts",
   "dependencies": {
-    "@cometh/checkout-sdk": "1.0.13"
+    "@cometh/checkout-sdk": "1.0.15"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",

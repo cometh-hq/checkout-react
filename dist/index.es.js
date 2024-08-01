@@ -1,5 +1,5 @@
-import m, { useMemo as I, useState as C, useCallback as L, useEffect as S } from "react";
-import { CheckoutAPI as T } from "@cometh/checkout-sdk";
+import T, { useMemo as m, useState as C, useCallback as L, useEffect as I } from "react";
+import { CheckoutAPI as S } from "@cometh/checkout-sdk";
 const R = 1e3;
 var y = /* @__PURE__ */ ((e) => (e.INITIATED = "initiated", e.CASHED = "cashed", e.RELAYED = "relayed", e.REVERTED = "reverted", e.CANCELLED = "cancelled", e.COMPLETED = "completed", e))(y || {});
 const D = [
@@ -9,7 +9,7 @@ const D = [
   /* COMPLETED */
 ];
 function N(e, t = "https://checkout.cometh.io/v1") {
-  return new T({
+  return new S({
     BASE: t,
     HEADERS: {
       apikey: e
@@ -17,7 +17,7 @@ function N(e, t = "https://checkout.cometh.io/v1") {
   });
 }
 function g(e, t) {
-  return I(
+  return m(
     () => N(e, t),
     [e, t]
   );
@@ -60,24 +60,24 @@ const _ = (e, t, n, u, a, r, h, k, l, s, c) => {
     c
   ]);
   return { isLoading: f, redirectToCheckoutSession: A };
-}, w = (e, t, n) => {
+}, b = (e, t, n) => {
   const u = g(e, t), [a, r] = C(!0), [h, k] = C(null), [l, s] = C(null), c = L(async () => {
     try {
       r(!0);
-      const o = await u.transactions.getTransactionById({
+      const o = await u.transactions.getPublicTransactionById({
         transactionId: n
       });
-      D.includes(
+      k(o), D.includes(
         o.status
-      ) ? (k(o), r(!1)) : setTimeout(c, R);
+      ) ? r(!1) : setTimeout(c, R);
     } catch (o) {
       console.error("Error during transaction polling", o), s(o), r(!1);
     }
   }, [u, n]);
-  return S(() => {
+  return I(() => {
     c();
   }, [c]), { isLoading: a, transaction: h, error: l };
-}, B = ({
+}, w = ({
   apikey: e,
   apiUrl: t,
   productId: n,
@@ -106,13 +106,13 @@ const _ = (e, t, n, u, a, r, h, k, l, s, c) => {
     o,
     f
   );
-  return /* @__PURE__ */ m.createElement("button", { ...E, onClick: i }, A ? s || "Redirecting..." : l || "Checkout now");
+  return /* @__PURE__ */ T.createElement("button", { ...E, onClick: i }, A ? s || "Redirecting..." : l || "Checkout now");
 };
 export {
-  B as CheckoutButton,
+  w as CheckoutButton,
   y as TransactionStatus,
   g as useCheckoutClient,
   _ as useCheckoutSession,
-  w as useWaitForTransaction
+  b as useWaitForTransaction
 };
 //# sourceMappingURL=index.es.js.map

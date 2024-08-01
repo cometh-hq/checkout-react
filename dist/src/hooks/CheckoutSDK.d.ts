@@ -1,4 +1,4 @@
-import { CheckoutAPI, Transaction } from '@cometh/checkout-sdk';
+import { CheckoutAPI } from '@cometh/checkout-sdk';
 
 export declare enum TransactionStatus {
     INITIATED = "initiated",
@@ -15,7 +15,7 @@ export declare const useCheckoutSession: (apikey: string, apiUrl: string | undef
 };
 export declare const useWaitForTransaction: (apikey: string, apiUrl: string | undefined, transactionId: string) => {
     isLoading: boolean;
-    transaction: Transaction | null;
+    transaction: import('@cometh/checkout-sdk').BaseTransaction | null;
     error: unknown;
 };
 //# sourceMappingURL=CheckoutSDK.d.ts.map
